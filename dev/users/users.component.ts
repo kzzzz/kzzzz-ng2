@@ -1,26 +1,24 @@
 import {Component, OnInit} from 'angular2/core';
-import {RouterLink} from 'angular2/router';
+import {RouterLink, ROUTER_DIRECTIVES} from 'angular2/router';
+
 import {UserService} from './user.service';
 
 @Component({
     selector: 'users',
     templateUrl: './dev/users/users.template.html',
     providers: [UserService],
-    directives: [RouterLink]
+    directives: [RouterLink, ROUTER_DIRECTIVES]
 })
 
 export class UsersComponent implements OnInit {
 
-    users: any[];
+    users:any[];
 
-    constructor(private _service: UserService){
+    constructor(private _service:UserService) {
     }
 
-    ngOnInit(){
+    ngOnInit() {
         this._service.getUsers()
-            .subscribe(users => {
-                console.log(users);
-                this.users = users
-            });
+            .subscribe(users => this.users = users);
     }
 }
