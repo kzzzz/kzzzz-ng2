@@ -9,7 +9,7 @@ import {UserService} from './user.service';
     directives: [RouterLink]
 })
 
-export class Users implements OnInit {
+export class UsersComponent implements OnInit {
 
     users: any[];
 

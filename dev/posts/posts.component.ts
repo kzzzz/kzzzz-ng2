@@ -5,6 +5,6 @@ import {Component} from 'angular2/core';
     template: `Posts`
 })
 
-export class Posts{
+export class PostsComponent{
 
 }
