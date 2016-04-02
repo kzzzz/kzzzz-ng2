@@ -1,7 +1,7 @@
 import {Component, OnInit} from 'angular2/core';
 import {FormBuilder, ControlGroup, Validators} from 'angular2/common';
 import {BasicValidators} from '../shared/basicValidators';
-import {CanDeactivate, Router, RouteParams} from 'angular2/router';
+import {CanDeactivate, ComponentInstruction, Router, RouteParams} from 'angular2/router';
 
 import {User} from './User'
 import {UserService} from './user.service';
@@ -10,7 +10,7 @@ import {UserService} from './user.service';
     templateUrl: './dev/users/user-form.template.html',
     providers: [UserService]
 })
-export class UserFormComponent implements OnInit {
+export class UserFormComponent implements OnInit, CanDeactivate {
 
     form:ControlGroup;
     title:string;
@@ -58,14 +58,22 @@ export class UserFormComponent implements OnInit {
                 })
     }
 
+    routerCanDeactivate(nextInstruction:ComponentInstruction, prevInstruction:ComponentInstruction):any {
+
+        if(this.form.dirty){
+            return confirm('Are you sure to leave this page?');
+        }
+
+        return true;
+    }
 
     save() {
 
         var result;
 
-        if(this.user.id){
+        if (this.user.id) {
             result = this._service.updateUser(this.user);
-        }else{
+        } else {
             result = this._service.addUser(this.user);
         }
 
