@@ -25,7 +25,7 @@ export class PostService {
     }
 
     getComments(postId) {
-        return this._http.get(this._url + "/" + postId + "/comments")
+        return this._http.get(`${this._url}/${postId}/comments`)
             .map(res => res.json());
     }
 }
